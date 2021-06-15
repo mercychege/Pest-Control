@@ -3,34 +3,55 @@ Definition of models.
 """
 
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+# Crop Model which translates to crop table in the DB
 
+class Crop(models.Model):
+    name = models.CharField(max_length=100)
+    scientific_name = models.CharField(max_length=100)
+    local_name = models.CharField(max_length=100)
+    image = models.ImageField(default='default.jpg',
+                              blank=True, upload_to='images/')
+
+    # date only when created, cant update this
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+# Pest Model which translates to pest table in the DB
 class Pest(models.Model):
     name = models.CharField(max_length=100)
-    pest_symptoms=models.TextField()
-    treatment_plan=models.TextField()
-    date_created = models.DateTimeField(auto_now_add=True) 
+    pest_symptoms = models.TextField()
+    treatment_plan = models.TextField()
+    crop = models.ForeignKey(Crop,  on_delete=models.SET_NULL, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self._check_long_column_names
+        return self.name
 
+# Disease Model which translates to disease table in the DB
 class Disease(models.Model):
     name = models.CharField(max_length=100)
-    disease_symptoms=models.TextField()
-    treatment_plan=models.TextField()
-    date_created = models.DateTimeField(auto_now_add=True) 
+    disease_symptoms = models.TextField()
+    treatment_plan = models.TextField()
+    crop = models.ForeignKey(Crop,  on_delete=models.SET_NULL, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
-class Plant(models.Model):
+# Role Model which translates to role table in the DB
+class Role(models.Model):
     name = models.CharField(max_length=100)
-    scientific_name=models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    image = models.ImageField(default='default.jpg', blank=True, upload_to=user_directory_path)
-    pest = models.ForeignKey(Pest, on_delete=models.CASCADE)
-    disease=models.ForeignKey(Disease,on_delete=models.CASCADE)
-    date_created = models.DateTimeField(auto_now_add=True) # date only when created, cant update this
-  
-    def __str__(self):
-        return self.name
+
+class User(AbstractUser):
+    pass
+class User(models.Model):
+   
+    name = models.CharField(max_length=100)
+    county = models.CharField(max_length=100)
+    mobile=models.IntegerField()
+    role= models.ForeignKey(Role,  on_delete=models.SET_NULL, null=True)
+    
 
 # Create your models here.
