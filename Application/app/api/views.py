@@ -1,7 +1,11 @@
 from rest_framework import viewsets
-from .serializers import CropSerializer,PestSerializer,DiseaseSerializer
+from .serializers import CropSerializer,PestSerializer,DiseaseSerializer,PostSerializer
 from rest_framework.generics import ListAPIView,RetrieveAPIView,CreateAPIView
-from app.models import Crop,Pest,Disease
+from app.models import Crop,Pest,Disease,Post
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset=Post.objects.all()
+    serializer_class=PostSerializer
 
 class CropViewSet(viewsets.ModelViewSet):
     queryset=Crop.objects.all()
