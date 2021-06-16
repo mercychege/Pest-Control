@@ -1,4 +1,4 @@
-#Pest Control Web Application
+# Pest Control Web Application
 
 This application aims to reduce the economic impact of plant diseases and pests by improving farmers' ability to diagnose and respond to plants/trees/vines with diseases or pest issues quickly.
 
