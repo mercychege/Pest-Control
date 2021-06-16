@@ -35,7 +35,7 @@ class Disease(models.Model):
     name = models.CharField(max_length=100)
     disease_symptoms = models.TextField()
     treatment_plan = models.TextField()
-    crop = models.ForeignKey(Crop,  on_delete=models.SET_NULL, null=True)
+    crop = models.ForeignKey(Crop, related_name='crop', on_delete=models.SET_NULL, null=True)
     pesticide = models.ForeignKey(Pesticide, on_delete=models.SET_NULL, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(default='default.jpg',
@@ -72,7 +72,14 @@ class Post(models.Model):
 class Shop(models.Model):
     name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
-    phone = models.IntegerField
+    phone = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
+class ShopProduct(models.Model):
+    shop = models.ForeignKey(Shop, on_delete=models.SET_NULL, null=True)
+    pesticide = models.ForeignKey(Pesticide, on_delete=models.SET_NULL, null=True)
+    price = models.FloatField()
     def __str__(self):
         return self.name

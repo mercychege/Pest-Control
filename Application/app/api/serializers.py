@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.models import Crop,Pesticide,Disease,Post,Shop
+from app.models import Crop,Pesticide,Disease,Post,Shop, ShopProduct
 
 
 class CropSerializer(serializers.ModelSerializer):
@@ -27,4 +27,9 @@ class PostSerializer(serializers.ModelSerializer):
 class ShopSerializer(serializers.ModelSerializer):
     class Meta:
         model=Shop
+        fields='__all__'
+
+class ShopProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=ShopProduct
         fields='__all__'
