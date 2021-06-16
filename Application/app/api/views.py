@@ -24,7 +24,7 @@ class DiseaseViewSet(viewsets.ModelViewSet):
     serializer_class=DiseaseSerializer
 
 class DiseaseList(ListAPIView):
-    serializer_class = DiseaseSerializer
+    serializer_class = CropSerializer
 
     def get_queryset(self):
         crop = self.request.crop

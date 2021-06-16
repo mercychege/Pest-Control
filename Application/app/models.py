@@ -36,6 +36,7 @@ class Disease(models.Model):
     disease_symptoms = models.TextField()
     treatment_plan = models.TextField()
     crop = models.ForeignKey(Crop,  on_delete=models.SET_NULL, null=True)
+    pesticide = models.ForeignKey(Pesticide, on_delete=models.SET_NULL, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(default='default.jpg',
                               blank=True, upload_to='images/')
