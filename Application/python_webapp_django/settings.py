@@ -33,7 +33,9 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'app',
+    'corsheaders',
     # Add your apps here to enable them
+#    'sslserver',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,16 +46,24 @@ INSTALLED_APPS = [
  
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+#    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'applicationinsights.django.ApplicationInsightsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+  
+    "http://localhost:3000",
+    "https://sprinterspestcontrol.herokuapp.com",
+   
 ]
 
 ROOT_URLCONF = 'python_webapp_django.urls'
@@ -168,3 +178,4 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
 }
+

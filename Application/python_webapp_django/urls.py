@@ -25,7 +25,7 @@ urlpatterns = [
     url('api-auth/',include('rest_framework.urls')),
     url('api/',include('app.api.urls')),
     url(r'^login/$',
-        django.contrib.auth.views.login,
+        django.contrib.auth.views.LoginView,
         {
             'template_name': 'app/login.html',
             'authentication_form': app.forms.BootstrapAuthenticationForm,
@@ -37,7 +37,7 @@ urlpatterns = [
         },
         name='login'),
     url(r'^logout$',
-        django.contrib.auth.views.logout,
+        django.contrib.auth.views.LogoutView,
         {
             'next_page': '/',
         },

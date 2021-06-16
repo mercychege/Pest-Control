@@ -21,12 +21,11 @@ class Crop(models.Model):
         return self.name
 
 # Pest Model which translates to pest table in the DB
-class Pest(models.Model):
+class Pesticide(models.Model):
     name = models.CharField(max_length=100)
-    pest_symptoms = models.TextField()
-    treatment_plan = models.TextField()
-    crop = models.ForeignKey(Crop,  on_delete=models.SET_NULL, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(default='default.jpg',
+                              blank=True, upload_to='images/')
 
     def __str__(self):
         return self.name
@@ -38,6 +37,8 @@ class Disease(models.Model):
     treatment_plan = models.TextField()
     crop = models.ForeignKey(Crop,  on_delete=models.SET_NULL, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(default='default.jpg',
+                              blank=True, upload_to='images/')
 
     def __str__(self):
         return self.name

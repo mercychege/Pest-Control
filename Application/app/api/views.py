@@ -1,7 +1,7 @@
 from rest_framework import viewsets
-from .serializers import CropSerializer,PestSerializer,DiseaseSerializer,PostSerializer
+from .serializers import CropSerializer,PesticideSerializer,DiseaseSerializer,PostSerializer
 from rest_framework.generics import ListAPIView,RetrieveAPIView,CreateAPIView
-from app.models import Crop,Pest,Disease,Post
+from app.models import Crop,Pesticide,Disease,Post
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset=Post.objects.all()
@@ -11,13 +11,25 @@ class CropViewSet(viewsets.ModelViewSet):
     queryset=Crop.objects.all()
     serializer_class=CropSerializer
 
-class PestViewSet(viewsets.ModelViewSet):
-    queryset=Pest.objects.all()
-    serializer_class=PestSerializer 
+class PesticideViewSet(viewsets.ModelViewSet):
+    queryset=Pesticide.objects.all()
+    serializer_class=PesticideSerializer 
 
 class DiseaseViewSet(viewsets.ModelViewSet):
     queryset=Disease.objects.all()
     serializer_class=DiseaseSerializer   
+
+class DiseaseViewSet(viewsets.ModelViewSet):
+    queryset=Disease.objects.all()
+    serializer_class=DiseaseSerializer
+
+class DiseaseList(ListAPIView):
+    serializer_class = DiseaseSerializer
+
+    def get_queryset(self):
+        crop = self.request.crop
+        return Disease.objects.filter(crop_id=crop)   
+        
 # class CropListView(ListAPIView):
 # 	queryset=Crop.objects.all()
 # 	serializer_class=CropSerializer
@@ -27,15 +39,15 @@ class DiseaseViewSet(viewsets.ModelViewSet):
 # class CropDetailView(RetrieveAPIView):
 # 	queryset=Crop.objects.all()
 # 	serializer_class = CropSerializer
-# class PestListView(ListAPIView):
-#     queryset=Pest.objects.all()
-#     serializer_class=PestSerializer
-# class PestCreateView(CreateAPIView):
-#     queryset=Pest.objects.all()
-#     serializer_class = PestSerializer   	
-# class PestDetailView(RetrieveAPIView):
-# 	queryset=Pest.objects.all()
-# 	serializer_class = PestSerializer
+# class PesticideListView(ListAPIView):
+#     queryset=Pesticide.objects.all()
+#     serializer_class=PesticideSerializer
+# class PesticideCreateView(CreateAPIView):
+#     queryset=Pesticide.objects.all()
+#     serializer_class = PesticideSerializer   	
+# class PesticideDetailView(RetrieveAPIView):
+# 	queryset=Pesticide.objects.all()
+# 	serializer_class = PesticideSerializer
 
 # class DiseaseListView(ListAPIView):
 #     queryset=Disease.objects.all()
