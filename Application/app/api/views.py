@@ -1,7 +1,7 @@
 from rest_framework import viewsets
-from .serializers import CropSerializer,PesticideSerializer,DiseaseSerializer,PostSerializer
+from .serializers import CropSerializer,PesticideSerializer,DiseaseSerializer,PostSerializer,ShopSerializer
 from rest_framework.generics import ListAPIView,RetrieveAPIView,CreateAPIView
-from app.models import Crop,Pesticide,Disease,Post
+from app.models import Crop,Pesticide,Disease,Post,Shop
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset=Post.objects.all()
@@ -19,9 +19,9 @@ class DiseaseViewSet(viewsets.ModelViewSet):
     queryset=Disease.objects.all()
     serializer_class=DiseaseSerializer   
 
-class DiseaseViewSet(viewsets.ModelViewSet):
-    queryset=Disease.objects.all()
-    serializer_class=DiseaseSerializer
+class ShopViewSet(viewsets.ModelViewSet):
+    queryset=Shop.objects.all()
+    serializer_class=ShopSerializer
 
 class DiseaseList(ListAPIView):
     serializer_class = DiseaseSerializer
