@@ -67,3 +67,12 @@ class Post(models.Model):
     
 
 # Create your models here.
+
+# Pest Model which translates to pest table in the DB
+class Shop(models.Model):
+    name = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    phone = models.IntegerField
+
+    def __str__(self):
+        return self.name
