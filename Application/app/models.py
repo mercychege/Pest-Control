@@ -5,12 +5,7 @@ Definition of models.
 from django.db import models
 from django.contrib.auth.models import User
 # Crop Model which translates to crop table in the DB
-class Post(models.Model):
-   
-    description=models.TextField()
-    image = models.ImageField(default='default.jpg',blank=True, upload_to='images/')
-    date_created = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE, null=True)
+
 
 class Crop(models.Model):
     name = models.CharField(max_length=100)
@@ -46,6 +41,15 @@ class Disease(models.Model):
 
     def __str__(self):
         return self.name
+
+class Post(models.Model):
+    
+    crop=models.ForeignKey(Crop,  on_delete=models.SET_NULL, null=True)
+    description=models.TextField()
+    image = models.ImageField(default='default.jpg',blank=True, upload_to='images/')
+
+    date_created = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE, null=True)
 # Role Model which translates to role table in the DB
 # class Role(models.Model):
 #     name = models.CharField(max_length=100)
