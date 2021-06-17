@@ -22,10 +22,10 @@ class Crop(models.Model):
 
 # Pest Model which translates to pest table in the DB
 class Pesticide(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(default='default.jpg',
-                              blank=True, upload_to='images/')
+                              blank=True, upload_to='images/', unique=True)
 
     def __str__(self):
         return self.name
@@ -70,7 +70,7 @@ class Post(models.Model):
 
 # Pest Model which translates to pest table in the DB
 class Shop(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     city = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
 
@@ -79,7 +79,10 @@ class Shop(models.Model):
 
 class ShopProduct(models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.SET_NULL, null=True)
+    # shop_name = models.ForeignKey(Shop, to_field="name", db_column="name",related_name='shop_name', on_delete=models.SET_NULL, null=True)
     pesticide = models.ForeignKey(Pesticide, on_delete=models.SET_NULL, null=True)
+    # pesticide_image = models.ForeignKey(Pesticide, to_field="image", db_column="image",related_name='pesticide_image', on_delete=models.SET_NULL, null=True)
+    # pesticide_name = models.ForeignKey(Pesticide, to_field="name", db_column="pesticide_name", related_name='pesticide_name', on_delete=models.SET_NULL, null=True)
     price = models.FloatField()
     def __str__(self):
         return self.name
