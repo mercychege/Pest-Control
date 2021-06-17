@@ -63,10 +63,13 @@ CORS_ALLOWED_ORIGINS = [
   
     "http://localhost:3000",
     "https://sprinterspestcontrol.herokuapp.com",
+    
    
 ]
 
 ROOT_URLCONF = 'python_webapp_django.urls'
+
+# SECURE_SSL_REDIRECT = True
 
 APPLICATION_INSIGHTS = {
     # (required) Your Application Insights instrumentation key
