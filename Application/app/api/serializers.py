@@ -29,7 +29,14 @@ class ShopSerializer(serializers.ModelSerializer):
         model=Shop
         fields='__all__'
 
+# class ShopProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model=ShopProduct
+#         fields='__all__'
+
 class ShopProductSerializer(serializers.ModelSerializer):
+    pesticide = PesticideSerializer()
+    shop = ShopSerializer()
     class Meta:
         model=ShopProduct
         fields='__all__'
